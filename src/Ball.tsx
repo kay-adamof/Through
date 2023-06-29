@@ -20,7 +20,7 @@ export const Ball: React.FC<BallProps> = ({
   x,
   y,
   seekRadius,
-  color
+  color,
 }) => {
   const [position, setPosition] = useState({ x: x, y: y });
   const requestRef = useRef<number>();
@@ -29,14 +29,17 @@ export const Ball: React.FC<BallProps> = ({
     const moveSelf = () => {
       const dx = position.x - oppositeX;
       const dy = position.y - oppositeY;
+
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       if (distance > 0 && distance < seekRadius - oppositeRadius - radius) {
         setPosition((prevState) => ({
           x: prevState.x - dx * 0.05,
-          y: prevState.y - dy * 0.05
+          y: prevState.y - dy * 0.05,
         }));
       }
+
+      if(distance < seekRadius - oppositeRadius - radius){ cancelAnimationFrame(requestRef.current)}
 
       requestRef.current = requestAnimationFrame(moveSelf);
     };

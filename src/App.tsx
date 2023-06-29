@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Stage, Layer } from "react-konva";
-import { Hero } from "./Hero";
+// import { Hero } from "./Hero";
+import Hero from "./components/Hero";
 import { Princess } from "./Princess";
 import { Enemies } from "./Enemies";
 import { stage } from "./Global";
 import BattleField from "./components/BattleField";
+
 
 const HERO_POSITION = {
   x: 10,
@@ -61,14 +63,7 @@ export default function App() {
   return (
     <>
       <BattleField>
-        <Hero
-          color={"black"}
-          x={heroPosition.x}
-          y={heroPosition.y}
-          radius={5}
-          directions={directions}
-          initialVelocity={1}
-        />
+        <Hero/>
         <Princess
           x={stage.width - 40}
           y={stage.height - 40}
