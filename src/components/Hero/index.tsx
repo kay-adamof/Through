@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Circle } from "react-konva";
-import { useAnimationFrame } from "react-timing-hooks";
-// Move left while pressing "D"
-// Move right while pressing "A"
-// Move up while pressing "W"
-// Move down while pressing "S"
-// Hero has figure as Mario
-// Hero has size
+import { useAnimationFrameLoop } from "react-timing-hooks";
 
 const radius = 10;
 const color = "black";
 
 const Hero = () => {
   const [pos, setPos] = useState({ x: 10, y: 10 });
-  const { start, stop, isStopped } = useAnimationFrame(() => {
+  const { start } = useAnimationFrameLoop(() => {
     setPos((prevPos) => ({
       x: prevPos.x + 0.1,
       y: prevPos.y + 0.1,
@@ -21,10 +15,15 @@ const Hero = () => {
   });
 
   useEffect(() => {
-    window.addEventListener("keydown", (event) => {
-      event.key === "KeyD";
-    });
-  });
+    function handleConsole(event: WindowEventMap["keydown"]) {
+      console.log(event.code);
+    }
+    window.addEventListener("keydown", handleConsole);
+    return () => {
+      window.removeEventListener("keydown", handleConsole);
+    };
+  }, []);
+
   return <Circle x={pos.x} y={pos.y} radius={radius} fill={color} />;
 };
 
