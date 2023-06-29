@@ -4,10 +4,11 @@ import { Hero } from "./Hero";
 import { Princess } from "./Princess";
 import { Enemies } from "./Enemies";
 import { stage } from "./Global";
+import BattleField from "./components/BattleField";
 
 const HERO_POSITION = {
   x: 10,
-  y: 10
+  y: 10,
 };
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
     left: 0,
     right: 0,
     up: 0,
-    down: 0
+    down: 0,
   });
 
   const requestRef = useRef<number | null>(null);
@@ -26,7 +27,7 @@ export default function App() {
   function handleMove(direction: string) {
     setDirections({
       ...directions,
-      [direction]: directions[direction] === 0 ? 1 : 0
+      [direction]: directions[direction] === 0 ? 1 : 0,
     });
   }
   useEffect(() => {
@@ -36,8 +37,9 @@ export default function App() {
     const move = () => {
       setHeroPosition((prevPosition) => ({
         x: prevPosition.x + vx,
-        y: prevPosition.y + vy
+        y: prevPosition.y + vy,
       }));
+
       requestRef.current = requestAnimationFrame(move);
     };
 
@@ -58,36 +60,23 @@ export default function App() {
 
   return (
     <>
-      <Stage
-        width={window.innerWidth}
-        height={window.innerHeight / 2}
-        style={{ border: "1px solid black" }}
-      >
-        <Layer>
-          <Hero
-            color={"black"}
-            x={heroPosition.x}
-            y={heroPosition.y}
-            radius={5}
-            directions={directions}
-            initialVelocity={1}
-          />
-          <Enemies
-            color={"red"}
-            radius={10}
-            headcount={10}
-            oppositeX={heroPosition.x}
-            oppositeY={heroPosition.y}
-            oppositeRadius={5}
-          />
-          <Princess
-            x={stage.width - 40}
-            y={stage.height - 40}
-            radius={5}
-            color={"pink"}
-          />
-        </Layer>
-      </Stage>
+      <BattleField>
+        <Hero
+          color={"black"}
+          x={heroPosition.x}
+          y={heroPosition.y}
+          radius={5}
+          directions={directions}
+          initialVelocity={1}
+        />
+        <Princess
+          x={stage.width - 40}
+          y={stage.height - 40}
+          radius={5}
+          color={"pink"}
+        />
+      </BattleField>
+
       <nav>
         <button onClick={() => handleMove("left")}>{"<"}</button>
         <button onClick={() => handleMove("up")}>{"^"}</button>
