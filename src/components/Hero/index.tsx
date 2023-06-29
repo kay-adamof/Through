@@ -2,29 +2,44 @@ import React, { useEffect, useState } from "react";
 import { Circle } from "react-konva";
 import { useAnimationFrameLoop } from "react-timing-hooks";
 
-const radius = 10;
-const color = "black";
-
+const arrowKeys = {
+  up: "Key" + "W",
+  down: "Key" + "S",
+  left: "Key" + "A",
+  right: "Key" + "R",
+};
 const Hero = () => {
   const [pos, setPos] = useState({ x: 10, y: 10 });
-  const { start } = useAnimationFrameLoop(() => {
+  const { start, stop } = useAnimationFrameLoop(() => {
     setPos((prevPos) => ({
-      x: prevPos.x + 0.1,
-      y: prevPos.y + 0.1,
+      x: prevPos.x + 1,
+      y: prevPos.y + 1,
     }));
   });
 
   useEffect(() => {
-    function handleConsole(event: WindowEventMap["keydown"]) {
-      console.log(event.code);
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.code === "KeyS") {
+        start();
+      }
     }
-    window.addEventListener("keydown", handleConsole);
-    return () => {
-      window.removeEventListener("keydown", handleConsole);
-    };
-  }, []);
 
-  return <Circle x={pos.x} y={pos.y} radius={radius} fill={color} />;
+    function handleKeyUp(event: KeyboardEvent) {
+      if (event.code === "KeyS") {
+        stop();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [start, stop]);
+
+  return <Circle x={pos.x} y={pos.y} radius={10} fill={"black"} />;
 };
 
 export default Hero;
