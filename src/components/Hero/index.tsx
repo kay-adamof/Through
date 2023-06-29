@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Circle } from "react-konva";
 import { useAnimationFrameLoop } from "react-timing-hooks";
 
+const createArrowKeys = (key: string, x: number, y: number) => ({
+  keyCode: "key" + key,
+  x: x,
+  y: y,
+});
+
 const arrowKeys = {
-  up: "Key" + "W",
-  down: "Key" + "S",
-  left: "Key" + "A",
-  right: "Key" + "R",
+  up: createArrowKeys("W", 0, -1),
+  down: createArrowKeys("S", 0, 1),
+  left: createArrowKeys("A", -1, 0),
+  right: createArrowKeys("D", 1, 0),
 };
 const Hero = () => {
   const [pos, setPos] = useState({ x: 10, y: 10 });
