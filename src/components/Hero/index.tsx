@@ -3,7 +3,7 @@ import { Circle } from "react-konva";
 import { useAnimationFrameLoop } from "react-timing-hooks";
 
 const createArrowKeys = (key: string, x: number, y: number) => ({
-  keyCode: "key" + key,
+  keyCode: "Key" + key,
   x: x,
   y: y,
 });
