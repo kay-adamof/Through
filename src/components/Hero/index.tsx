@@ -14,8 +14,13 @@ const arrowKeys = {
   left: createArrowKeys("A", -1, 0),
   right: createArrowKeys("D", 1, 0),
 };
+
+const initialDirection = { x: 0, y: 0 };
+
 const Hero = () => {
   const [pos, setPos] = useState({ x: 10, y: 10 });
+  const [direction, setDirection] = useState(initialDirection);
+
   const { start, stop } = useAnimationFrameLoop(() => {
     setPos((prevPos) => ({
       x: prevPos.x + 1,
