@@ -1,4 +1,5 @@
 version: "3.8"
 services:
   node:
-    command: [npm run dev]
+    volumes:
+      - ./$npm_package_config_container/app:/app
