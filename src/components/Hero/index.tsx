@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Circle } from "react-konva";
 import { useAnimationFrameLoop } from "react-timing-hooks";
 
@@ -116,67 +116,99 @@ const Hero = () => {
   //   };
   // }, [loopLeft]);
 
-  // /// ==== loopDown
-  // const loopDown = useAnimationFrameLoop(() => {
-  //   setPos((prevPos) => ({
-  //     x: prevPos.x + arrowKeys.down.x,
-  //     y: prevPos.y + arrowKeys.down.y,
-  //   }));
-  // });
-  //
-  // useEffect(() => {
-  //   function handleKeyDown(event: globalThis.KeyboardEvent) {
-  //     if (event.code === arrowKeys.down.keyCode) {
-  //       event.preventDefault();
-  //       event.stopPropagation();
-  //
-  //       loopDown.start();
-  //     }
-  //   }
-  //   function handleKeyUp(event: globalThis.KeyboardEvent) {
-  //     if (event.code === arrowKeys.down.keyCode) {
-  //       event.preventDefault();
-  //       event.stopPropagation();
-  //
-  //       loopDown.stop();
-  //     }
-  //   }
-  //   window.addEventListener("keydown", handleKeyDown);
-  //   window.addEventListener("keyup", handleKeyUp);
-  //
-  //   return () => {
-  //     window.removeEventListener("keydown", handleKeyDown);
-  //     window.removeEventListener("keyup", handleKeyUp);
-  //   };
-  // }, [loopDown]);
+  useEffect(() => {
+    function handleKeyDown(event: globalThis.KeyboardEvent) {
+      if (event.code === arrowKeys.left.keyCode) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        loopLeft.start();
+      }
+    }
+    function handleKeyUp(event: globalThis.KeyboardEvent) {
+      if (event.code === arrowKeys.left.keyCode) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        loopLeft.stop();
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [loopLeft]);
+
+  /// ==== loopDown
+  const loopDown = useAnimationFrameLoop(() => {
+    setPos((prevPos) => ({
+      x: prevPos.x + arrowKeys.down.x,
+      y: prevPos.y + arrowKeys.down.y,
+    }));
+  });
+
+  useEffect(() => {
+    function handleKeyDown(event: globalThis.KeyboardEvent) {
+      if (event.code === arrowKeys.down.keyCode) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        loopDown.start();
+      }
+    }
+    function handleKeyUp(event: globalThis.KeyboardEvent) {
+      if (event.code === arrowKeys.down.keyCode) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        loopDown.stop();
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [loopDown]);
 
   /// ==== loopUp
-  // const loopUp = useAnimationFrameLoop(() => {
-  //   setPos((prevPos) => ({
-  //     x: prevPos.x + arrowKeys.up.x,
-  //     y: prevPos.y + arrowKeys.up.y,
-  //   }));
-  // });
-  //
-  // useEffect(() => {
-  //   function handleKeyDown(event: globalThis.KeyboardEvent) {
-  //     if (event.code === arrowKeys.up.keyCode) {
-  //       loopUp.start();
-  //     }
-  //   }
-  //   function handleKeyUp(event: globalThis.KeyboardEvent) {
-  //     if (event.code === arrowKeys.up.keyCode) {
-  //       loopUp.stop();
-  //     }
-  //   }
-  //   window.addEventListener("keydown", handleKeyDown);
-  //   window.addEventListener("keyup", handleKeyUp);
-  //
-  //   return () => {
-  //     window.removeEventListener("keydown", handleKeyDown);
-  //     window.removeEventListener("keyup", handleKeyUp);
-  //   };
-  // }, [loopUp]);
+  const loopUp = useAnimationFrameLoop(() => {
+    setPos((prevPos) => ({
+      x: prevPos.x + arrowKeys.up.x,
+      y: prevPos.y + arrowKeys.up.y,
+    }));
+  });
+
+  useEffect(() => {
+    function handleKeyDown(event: globalThis.KeyboardEvent) {
+      if (event.code === arrowKeys.up.keyCode) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        loopUp.start();
+      }
+    }
+    function handleKeyUp(event: globalThis.KeyboardEvent) {
+      if (event.code === arrowKeys.up.keyCode) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        loopUp.stop();
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [loopUp]);
 
   return <Circle x={pos.x} y={pos.y} radius={10} fill="black" />;
 };

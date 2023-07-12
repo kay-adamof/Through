@@ -5,18 +5,34 @@ services:
       dockerfile_inline: |
         FROM node:18-alpine
         WORKDIR /app
-        RUN npm create vite@latest . -- --template react-swc-ts && echo y
+        RUN npm create vite@latest . -- --template react-swc-ts && echo y && npm install
+        RUN echo 'import { defineConfig } from "vite";\
+            import react from "@vitejs/plugin-react-swc";\
+            export default defineConfig({\
+              plugins: [react()],\
+              server: {\
+                watch: {\
+                  usePolling: true,\
+                },\
+                host: true,\
+                strictPort: true,\
+                port: 5173,\
+              },\
+            });' > vite.config.ts
+
+    # ENTRYPOINT [ "npm", "run" ]
     # user: "node"
-    image: "node18:vite"
+    image: node18:vite
     working_dir: /app
-    container_name: vite
+    container_name: $npm_package_config_container
     # environment:
     #   - CHOKIDAR_USEPOLLING=true
     #   - NODE_ENV=development
-    # volumes:
-    #   - ./src:/home/node/app
+    volumes:
+      - ./$npm_package_config_container/app:/app
+      # - /app/node_modules
     ports:
       - 5173:5173
-    # command: 
+    # command: ["npm","run","dev"]
     stdin_open: true
     tty: true
