@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Circle } from "react-konva";
 import { useAnimationFrameLoop } from "react-timing-hooks";
 
-type orientation = "up" | "down" | "left" | "right";
-
-const orientations: orientation[] = ["up", "down", "left", "right"];
-
 const createArrowKeys = (key: string, x: number, y: number) => ({
   keyCode: "Key" + key,
   x: x,
