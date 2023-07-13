@@ -19,40 +19,8 @@ const arrowKeys = {
   right: createArrowKeys("D", 1, 0),
 };
 
-
-const initialDirection = { x: 0, y: 0 };
-
 const Hero = () => {
   const [pos, setPos] = useState({ x: 100, y: 100 });
-  // const [direction, setDirection] = useState(initialDirection);
-  //
-  // const loops_2 = orientations.reduce((acc, item) => {
-  //   acc[item] = useAnimationFrameLoop(() => {
-  //     setPos((prevPos) => ({
-  //       x: prevPos.x + arrowKeys[item].x * speed,
-  //       y: prevPos.y + arrowKeys[item].y * speed,
-  //     }));
-  //   });
-  //   return acc;
-  // }, {});
-  //
-  // const loops = orientations.map((v) =>
-  //   useAnimationFrameLoop(() => {
-  //     setPos((prevPos) => ({
-  //       x: prevPos.x + arrowKeys[v].x * speed,
-  //       y: prevPos.y + arrowKeys[v].y * speed,
-  //     }));
-  //   })
-  // );
-  //
-  // const useCreateLoop = (orientation: orientation) => {
-  //   return useAnimationFrameLoop(() => {
-  //     setPos((prevPos) => ({
-  //       x: prevPos.x + arrowKeys[orientation].x * speed,
-  //       y: prevPos.y + arrowKeys[orientation].y * speed,
-  //     }));
-  //   });
-  // };
 
   /// ==== loopRight
   const loopRight = useAnimationFrameLoop(() => {
