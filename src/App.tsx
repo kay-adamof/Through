@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Stage, Layer } from "react-konva";
-// import { Hero } from "./Hero";
 import Hero from "./components/Hero";
 import { Princess } from "./Princess";
-import { Enemies } from "./Enemies";
 import { stage } from "./Global";
 import BattleField from "./components/BattleField";
 
@@ -73,10 +70,6 @@ export default function App() {
       </BattleField>
 
       <nav>
-        <button onClick={() => handleMove("left")}>{"<"}</button>
-        <button onClick={() => handleMove("up")}>{"^"}</button>
-        <button onClick={() => handleMove("down")}>{"v"}</button>
-        <button onClick={() => handleMove("right")}>{">"}</button>
         <button onClick={handleResetPosition}>reset</button>
       </nav>
     </>
