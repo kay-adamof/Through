@@ -5,3 +5,5 @@ services:
       - ./src:/app/src
       - ./vite/app/index.html:/app/index.html
       - ./vite/app/node_modules:/app/node_modules
+    command: ["npm","run","dev"]
+
