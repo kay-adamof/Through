@@ -15,12 +15,12 @@ const arrowKeys = {
   right: createArrowKeys("D", 1, 0),
 } as const;
 
-export const Hero = ({x,y}) => {
+export const Hero: React.FC<Pick<IHero, "x" | "y" | "setPos">> = (props) => {
   // const [pos, setPos] = useState({ x: 100, y: 100 });
 
   const loopCreater = (direction: keyof typeof arrowKeys) => {
     return useAnimationFrameLoop(() => {
-      setPos((prevPos) => ({
+      props.setPos((prevPos) => ({
         x: prevPos.x + arrowKeys[direction].x,
         y: prevPos.y + arrowKeys[direction].y,
       }));
@@ -29,15 +29,17 @@ export const Hero = ({x,y}) => {
 
   const createCrossMotion = (
     direction: keyof typeof arrowKeys,
-    fn: (direction: keyof typeof arrowKeys) => ReturnType<typeof useAnimationFrameLoop>
-  ) => { 
+    fn: (
+      direction: keyof typeof arrowKeys
+    ) => ReturnType<typeof useAnimationFrameLoop>
+  ) => {
     const loop = fn(direction);
     useEffect(() => {
       function handleKeyDown(event: globalThis.KeyboardEvent) {
         if (event.code === arrowKeys[direction].keyCode) {
           loop.start();
-        } 
-      } 
+        }
+      }
       function handleKeyUp(event: globalThis.KeyboardEvent) {
         if (event.code === arrowKeys[direction].keyCode) {
           loop.stop();
@@ -45,18 +47,17 @@ export const Hero = ({x,y}) => {
       }
       window.addEventListener("keydown", handleKeyDown);
       window.addEventListener("keyup", handleKeyUp);
- 
+
       return () => {
         window.removeEventListener("keydown", handleKeyDown);
         window.removeEventListener("keyup", handleKeyUp);
-      }; 
+      };
     }, [loop]);
   };
-  createCrossMotion("right",loopCreater)
-  createCrossMotion("left", loopCreater) 
-  createCrossMotion("up", loopCreater) 
-  createCrossMotion("down", loopCreater) 
+  createCrossMotion("right", loopCreater);
+  createCrossMotion("left", loopCreater);
+  createCrossMotion("up", loopCreater);
+  createCrossMotion("down", loopCreater);
 
-  return <Circle x={pos.x} y={pos.y} radius={10} fill="black" />;
+  return <Circle x={props.x} y={props.y} radius={10} fill="black" />;
 };
-
