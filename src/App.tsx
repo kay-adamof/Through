@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Hero from "./components/Hero";
+import { Hero } from "./components/Hero";
 import { Princess } from "./Princess";
 import { stage } from "./Global";
 import BattleField from "./components/BattleField";

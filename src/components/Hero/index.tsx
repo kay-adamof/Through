@@ -15,8 +15,8 @@ const arrowKeys = {
   right: createArrowKeys("D", 1, 0),
 } as const;
 
-const Hero = () => {
-  const [pos, setPos] = useState({ x: 100, y: 100 });
+export const Hero = ({x,y}) => {
+  // const [pos, setPos] = useState({ x: 100, y: 100 });
 
   const loopCreater = (direction: keyof typeof arrowKeys) => {
     return useAnimationFrameLoop(() => {
@@ -60,4 +60,3 @@ const Hero = () => {
   return <Circle x={pos.x} y={pos.y} radius={10} fill="black" />;
 };
 
-export default Hero;
