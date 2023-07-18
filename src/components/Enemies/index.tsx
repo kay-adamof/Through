@@ -12,8 +12,9 @@ const INITIAL_STATE: (
     y: random(INITIAL_BATTLEFIELD.y1, INITIAL_BATTLEFIELD.y2),
   }));
 
-
-export const Enemies: React.FC<IEnemyProps> = (props) => {
+export const Enemies: React.FC<Pick<IEnemy, "oppositeX" | "oppositeY">> = (
+  props
+) => {
   const enemies = INITIAL_STATE(10);
   return (
     <>
@@ -23,8 +24,8 @@ export const Enemies: React.FC<IEnemyProps> = (props) => {
             key={enemy.id}
             oppositeX={props.oppositeX}
             oppositeY={props.oppositeY}
-            x={props.x}
-            y={props.y}
+            x={enemy.x}
+            y={enemy.y}
           />
         );
       })}
