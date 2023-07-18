@@ -2,13 +2,8 @@ import { useEffect, useState } from "react";
 import { Circle } from "react-konva";
 import { useAnimationFrameLoop } from "react-timing-hooks";
 
-declare global {
-  interface IEnemyProps
-    extends Pick<IEnemy, "y" | "x" | "oppositeX" | "oppositeY"> {}
-}
-
 export const Enemy: React.FC<
-  IEnemyProps
+  Pick<IEnemy, "y" | "x" | "oppositeX" | "oppositeY">
 > = (props) => {
   const [pos, setPos] = useState({ x: 200, y: 200 });
 
