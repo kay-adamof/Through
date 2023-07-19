@@ -18,15 +18,19 @@ export const Enemy: React.FC<
     }));
   });
 
+  const seekCondition: () => boolean = () => {
+    return distance < 50 && distance > 0.1;
+  };
+
   useEffect(() => {
-    console.log(dx, dy, distance)
-    if (distance < 30 && distance > 0.01) {
+    console.log(dx, dy, distance);
+    if (seekCondition()) {
       loop.start();
     }
     return () => {
       loop.stop();
     };
-  }, [distance < 30 && distance > 0.01]);
+  }, [seekCondition()]);
 
   return <Circle x={pos.x} y={pos.y} stroke={"black"} radius={20} />;
 };
