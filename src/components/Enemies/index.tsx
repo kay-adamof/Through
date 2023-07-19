@@ -12,10 +12,14 @@ const INITIAL_STATE: (
     y: random(INITIAL_BATTLEFIELD.y1, INITIAL_BATTLEFIELD.y2),
   }));
 
-export const Enemies: React.FC<Pick<IEnemy, "oppositeX" | "oppositeY">> = (
+interface IEnemies extends IEnemy{
+    headCount:number
+  }
+
+export const Enemies: React.FC<Pick<IEnemies, "headCount"|"oppositeX" | "oppositeY">> = (
   props
 ) => {
-  const enemies = INITIAL_STATE(10);
+  const enemies = INITIAL_STATE(props.headCount);
   return (
     <>
       {enemies.map((enemy) => {

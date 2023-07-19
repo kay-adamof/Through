@@ -5,11 +5,11 @@ import { useAnimationFrameLoop } from "react-timing-hooks";
 export const Enemy: React.FC<
   Pick<IEnemy, "y" | "x" | "oppositeX" | "oppositeY">
 > = (props) => {
-  const [pos, setPos] = useState({ x: 200, y: 200 });
+  const [pos, setPos] = useState({ x: props.x, y: props.y });
 
   const dx = pos.x - props.oppositeX;
   const dy = pos.y - props.oppositeY;
-  const distance = Math.sqrt(dx * dx - dy * dy);
+  const distance = Math.sqrt(dx * dx + dy * dy);
 
   const loop = useAnimationFrameLoop(() => {
     setPos((prevPos) => ({
@@ -19,13 +19,14 @@ export const Enemy: React.FC<
   });
 
   useEffect(() => {
+    console.log(dx, dy, distance)
     if (distance < 30 && distance > 0.01) {
       loop.start();
     }
     return () => {
       loop.stop();
     };
-  }, [distance]);
+  }, [distance < 30 && distance > 0.01]);
 
   return <Circle x={pos.x} y={pos.y} stroke={"black"} radius={20} />;
 };

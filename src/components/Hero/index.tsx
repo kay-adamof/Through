@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Circle } from "react-konva";
 import { useAnimationFrameLoop } from "react-timing-hooks";
 

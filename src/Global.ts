@@ -1,6 +1,6 @@
 export const stage = {
   width: window.innerWidth,
-  height: window.innerHeight / 2
+  height: window.innerHeight / 2,
 };
 export const random = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min;
