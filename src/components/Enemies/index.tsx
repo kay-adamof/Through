@@ -1,4 +1,4 @@
-import { stage, random, Battlefield } from "../../global";
+import { stage, random, Battlefield } from "../../Global";
 import { Enemy } from "../../components/Enemy";
 
 const INITIAL_BATTLEFIELD = new Battlefield(stage.width, stage.height);
