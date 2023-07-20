@@ -18,7 +18,7 @@ export const Enemy: React.FC<
     }));
   });
 
-  const seekCondition: () => boolean = () => {
+  const seekCondition = ():boolean => {
     return distance < 50 && distance > 0.1;
   };
 
