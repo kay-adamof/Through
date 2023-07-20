@@ -48,7 +48,6 @@
     "docker:create": "docker-compose -f docker-compose.yml create",
     "docker:build": "docker-compose -f docker-compose.yml build",
     "docker:exec": "docker exec -it $npm_package_config_container /bin/ash",
-    "docker:down:create:copy:up:exec": "npm run docker:down && npm run docker:create && npm run docker:copy && npm run docker:up && npm run docker:exec"
   },
   "browserslist": [
     ">0.2%",
