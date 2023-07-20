@@ -47,7 +47,7 @@
     "docker:down": "docker-compose -f docker-compose.yml down",
     "docker:create": "docker-compose -f docker-compose.yml create",
     "docker:build": "docker-compose -f docker-compose.yml build",
-    "docker:exec": "docker exec -it $npm_package_config_container /bin/ash",
+    "docker:exec": "docker exec -it $npm_package_config_container /bin/ash"
   },
   "browserslist": [
     ">0.2%",
